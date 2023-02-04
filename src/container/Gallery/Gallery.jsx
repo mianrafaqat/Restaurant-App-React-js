@@ -5,18 +5,22 @@ import { images } from '../../constants';
 
 import './Gallery.css';
 
+const gallertImages = [images.gallery01, images.gallery02, images.gallery03, images.gallery04]
+
 const Gallery = () => {
   const scrollRef = useRef(null)
 
   const scroll = (direction) => {
-    const { current } = scrollRef
+    const { current } = scrollRef;
 
-    if(direction == 'left') {
-      current.scrollLeft -= 300
+    if (direction === 'left') {
+      current.scrollLeft -= 300;
     } else {
-      current.scrollRight += 300
+      current.scrollLeft += 300;
     }
-  }
+  };
+
+  
   return (
     <div className='app__gallery flex__center'>
       <div className='app__gallery-content'>
@@ -28,9 +32,15 @@ const Gallery = () => {
 
       <div className='app__gallery-images'>
         <div className='app__gallery-images_container' ref={scrollRef}>
+          {gallertImages.map((image, index) => (
+            <div className='app__gallery-images_card flex__center' key={`gallery_image-${index + 1}`}>
+              <img src={image} alt='gallery' />
+              <BsInstagram className='gallery__image-icon' />
+            </div>
+          ))}
           <div className='app_gallery-images_arrow'>
-            <BsArrowLeftShort className='gallery__arrow-icon' onClick={() => scroll('left')} />
-            <BsArrowRightShort className='gallery__arrow-icon' onClick={() => scroll('right')} />
+          <BsArrowLeftShort className="gallery__arrow-icon" onClick={() => scroll('left')} />
+          <BsArrowRightShort className="gallery__arrow-icon" onClick={() => scroll('right')} />
           </div>
         </div>
       </div>
